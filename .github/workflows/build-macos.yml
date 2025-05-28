@@ -1,3 +1,4 @@
+# .github/workflows/build-macos.yml
 name: Build macOS App
 
 on:
@@ -8,16 +9,29 @@ on:
 jobs:
   py2app:
     runs-on: macos-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
-        with: { python-version: '3.x' }
-      - run: |
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
           pip install --upgrade pip
           pip install customtkinter py2app
-      - run: python setup.py py2app
-      - run: ls -R dist
-      - uses: actions/upload-artifact@v3
+
+      - name: Build .app with py2app
+        run: python setup.py py2app
+
+      - name: List output
+        run: ls -R dist
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2    # ← change here
         with:
           name: NiagaraLessonBuilder-macOS
           path: dist/*.app
