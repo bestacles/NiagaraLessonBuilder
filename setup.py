@@ -5,6 +5,9 @@ APP = ['main.py']
 OPTIONS = {
     "argv_emulation": True,
     "packages": ["customtkinter"],
+    'alias': False,
+    'strip': False,                # same as --no-strip
+    'codesign_identity': None,     # same as --codesign-identity ""
     "plist": {
         "CFBundleName": "Niagara Lesson Builder",
         "CFBundleShortVersionString": "1.0",
