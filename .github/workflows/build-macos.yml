@@ -24,8 +24,10 @@ jobs:
           pip install --upgrade pip
           pip install customtkinter py2app
 
-      - name: Build .app with py2app
-        run: python setup.py py2app
+      - name: Build .app with py2app (no codesign, no strip)
+        run: |
+          python setup.py py2app --sign "" --no-strip
+
 
       - name: List output
         run: ls -R dist
