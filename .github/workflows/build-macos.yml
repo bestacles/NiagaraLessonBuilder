@@ -25,7 +25,8 @@ jobs:
 
       - name: Build .app (no signing / no strip)
         run: |
-          python setup.py py2app --codesign-identity "" --no-strip
+          python setup.py py2app --codesign-identity= --no-strip
+
 
       - name: List contents
         run: ls -R dist
