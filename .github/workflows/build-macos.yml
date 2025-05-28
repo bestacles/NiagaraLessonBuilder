@@ -6,33 +6,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  py2app:
+  mac-build:
     runs-on: macos-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with: { python-version: '3.x' }
 
       - name: Install deps
         run: |
           pip install --upgrade pip
-          pip install customtkinter py2app
+          pip install customtkinter pyinstaller
 
-      - name: Build .app (no signing / no strip)
+      - name: Build .app with PyInstaller
         run: |
-          python setup.py py2app --codesign-identity= --no-strip
-
-
-      - name: List contents
-        run: ls -R dist
+          pyinstaller --windowed --name "Niagara Lesson Builder" main.py
+          # or:  pyinstaller niagara.spec
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: NiagaraLessonBuilder-macOS
-          path: dist/*.app
+          path: dist/Niagara\ Lesson\ Builder.app
