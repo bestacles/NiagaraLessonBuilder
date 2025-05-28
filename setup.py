@@ -5,13 +5,15 @@ DATA_FILES = []
 OPTIONS = {
     "argv_emulation": True,
     "packages": ["customtkinter"],
-    # If you have an .icns for an icon, uncomment and point here:
-    # "iconfile": "assets/app.icns",
+    # "iconfile": "assets/app.icns",  # optional: path to your .icns file
     "plist": {
         "CFBundleName": "Niagara Lesson Builder",
         "CFBundleShortVersionString": "1.0",
         "CFBundleIdentifier": "com.bestacles.niagaralb"
     },
+    # disable auto code-signing & stripping in CI
+    "codesign_identity": None,
+    "strip": False,
 }
 
 setup(
