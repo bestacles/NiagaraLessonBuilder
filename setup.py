@@ -1,19 +1,15 @@
-# setup.py
+# setup.py  (project root, next to main.py)
 from setuptools import setup
 
-APP = ['main.py']
+APP = ["main.py"]
 OPTIONS = {
     "argv_emulation": True,
     "packages": ["customtkinter"],
-    'alias': False,
-    'strip': False,                # same as --no-strip
-    'codesign_identity': None,     # same as --codesign-identity ""
     "plist": {
         "CFBundleName": "Niagara Lesson Builder",
         "CFBundleShortVersionString": "1.0",
-        "CFBundleIdentifier": "com.bestacles.niagaralb"
+        "CFBundleIdentifier": "com.bestacles.niagaralb",
     },
-    # (no codesign_identity / strip here)
 }
 
 setup(
